@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Team Apex Gaming — warm dark editorial design system.
+   All colors HSL. Cream headings, burnt-orange accents, never pure black. */
+
+@layer base {
+  :root {
+    /* Warm dark backgrounds */
+    --background: 30 16% 5%;            /* #0D0B09 */
+    --foreground: 48 56% 89%;           /* #F3EDD5 cream */
+
+    --surface-1: 30 16% 8%;             /* #181410 */
+    --surface-2: 30 16% 11%;            /* #211C17 */
+    --surface-3: 30 14% 15%;            /* #2B2520 */
+
+    --card: 30 16% 8%;
+    --card-foreground: 48 56% 89%;
+
+    --popover: 30 16% 8%;
+    --popover-foreground: 48 56% 89%;
+
+    /* Burnt orange — logo arrow */
+    --primary: 23 67% 50%;              /* #D4722A */
+    --primary-foreground: 48 56% 89%;
+    --primary-light: 23 76% 60%;        /* #E8894A */
+    --primary-dark: 23 68% 39%;         /* #A85820 */
+    --primary-muted: 19 60% 15%;        /* #3D2010 */
+
+    --secondary: 30 16% 11%;
+    --secondary-foreground: 48 56% 89%;
+
+    --muted: 30 16% 11%;
+    --muted-foreground: 36 9% 55%;      /* #9A9080 */
+    --muted-strong: 33 11% 33%;         /* #5C544A */
+
+    --accent: 23 67% 50%;
+    --accent-foreground: 48 56% 89%;
+
+    --cream: 48 56% 89%;
+    --cream-muted: 48 26% 73%;          /* #C8C2AA */
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 48 56% 89%;
+
+    --success: 95 41% 39%;              /* #5C8C3A */
+    --gold: 41 78% 45%;                 /* #C9901A */
+
+    --border: 27 26% 16%;               /* #33291F */
+    --border-light: 27 30% 22%;         /* #443626 */
+    --input: 30 16% 11%;
+    --ring: 23 67% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  /* Force dark — site is always dark */
+  html { color-scheme: dark; }
+
+  * { @apply border-border; }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', sans-serif;
+    color: hsl(var(--cream));
+    letter-spacing: 0.01em;
+  }
+
+  ::selection { background: hsl(var(--primary)); color: hsl(var(--cream)); }
+
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-apex {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .label-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: hsl(var(--primary));
+  }
+
+  .heading-hero {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: clamp(48px, 9vw, 80px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: hsl(var(--cream));
+  }
+
+  .divider-arrow {
+    position: relative;
+    height: 1px;
+    background: hsl(var(--border));
+    margin: 40px 0;
+  }
+  .divider-arrow::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60px;
+    height: 1px;
+    background: hsl(var(--primary));
+    transform: translate(-50%, -50%) rotate(-1deg);
+  }
+
+  .card-apex {
+    @apply rounded-lg border border-border bg-surface-1 transition-all duration-300;
+  }
+  .card-apex:hover {
+    @apply border-primary -translate-y-0.5;
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.15);
+  }
+
+  .pill-orange {
+    @apply inline-flex items-center rounded px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em];
+    background: hsl(var(--primary-muted));
+    color: hsl(var(--primary));
+  }
+
+  .pill-muted {
+    @apply inline-flex items-center rounded px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em];
+    background: hsl(var(--surface-2));
+    color: hsl(var(--muted-foreground));
+  }
+
+  .ticker-track {
+    animation: ticker 40s linear infinite;
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(hsl(var(--cream) / 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--cream) / 0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-glow {
+    background: radial-gradient(ellipse at center, hsl(var(--primary) / 0.12) 0%, transparent 60%);
+  }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(360deg); }
+}
+.animate-float-slow { animation: float-slow 30s linear infinite; }
