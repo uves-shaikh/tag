@@ -1,6 +1,13 @@
 const items = [
-  "Team Apex Gaming", "BGMI", "Est. April 2026", "Time To Rise",
-  "Jonathan Gaming", "Shreeman Legend", "SSR Vlogs", "#TAGonTop",
+  "Time To Rise",
+  "#TAGonTop",
+  "Team Apex Gaming",
+  "Est. April 2026",
+  "Rise. Build. Inspire.",
+  "India's Finest",
+  "BGMI Powerhouse",
+  "Born To Compete",
+  "We Are Apex",
 ];
 
 export default function Ticker() {

@@ -1,23 +1,26 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/team", label: "Team" },
-  { to: "/roster/bgmi", label: "Roster" },
-  { to: "/news", label: "News" },
-  { to: "/achievements", label: "Trophies" },
-  { to: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/team", label: "Team" },
+  { href: "/roster/bgmi", label: "Roster" },
+  { href: "/news", label: "News" },
+  { href: "/achievements", label: "Trophies" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -26,7 +29,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header
@@ -38,7 +46,11 @@ export default function Navbar() {
       )}
     >
       <nav className="container-apex flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group" aria-label="Team Apex Gaming home">
+        <Link
+          href="/"
+          className="flex items-center gap-2 group"
+          aria-label="Team Apex Gaming home"
+        >
           <span className="font-display font-bold text-cream text-xl tracking-wide">
             APEX <span className="text-primary">GAMING</span>
           </span>
@@ -46,34 +58,33 @@ export default function Navbar() {
         </Link>
 
         <ul className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <li key={l.to}>
-              <NavLink
-                to={l.to}
-                end={l.to === "/"}
-                className={({ isActive }) =>
-                  cn(
+          {links.map((l) => {
+            const active = isActive(l.href);
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={cn(
                     "relative text-sm font-medium tracking-wide transition-colors py-1",
-                    isActive ? "text-primary" : "text-cream-muted hover:text-cream"
-                  )
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {l.label}
-                    {isActive && (
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-primary" />
-                    )}
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
+                    active
+                      ? "text-primary"
+                      : "text-cream-muted hover:text-cream"
+                  )}
+                >
+                  {l.label}
+                  {active && (
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-primary" />
+                  )}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <a
           href={SOCIAL_LINKS.instagram}
-          target="_blank" rel="noreferrer"
+          target="_blank"
+          rel="noreferrer"
           className="hidden lg:inline-flex items-center gap-1.5 rounded-md border border-primary px-4 py-2 text-xs font-medium uppercase tracking-[0.12em] text-primary hover:bg-primary hover:text-cream transition-colors"
         >
           Follow Us <ArrowUpRight className="h-3.5 w-3.5" />
@@ -91,26 +102,27 @@ export default function Navbar() {
       {open && (
         <div className="lg:hidden fixed inset-0 top-16 bg-background/98 backdrop-blur-sm animate-fade-in">
           <ul className="container-apex flex flex-col gap-1 py-8">
-            {links.map((l) => (
-              <li key={l.to}>
-                <NavLink
-                  to={l.to}
-                  end={l.to === "/"}
-                  className={({ isActive }) =>
-                    cn(
+            {links.map((l) => {
+              const active = isActive(l.href);
+              return (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className={cn(
                       "block py-4 text-2xl font-display font-semibold border-b border-border",
-                      isActive ? "text-primary" : "text-cream"
-                    )
-                  }
-                >
-                  {l.label}
-                </NavLink>
-              </li>
-            ))}
+                      active ? "text-primary" : "text-cream"
+                    )}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })}
             <li className="pt-6">
               <a
                 href={SOCIAL_LINKS.instagram}
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-cream hover:bg-primary-light transition-colors"
               >
                 Follow @team.apexgaming <ArrowUpRight className="h-4 w-4" />

@@ -1,6 +1,6 @@
-# Team Apex Gaming — Official Website
+# Team Apex Gaming - Official Website
 
-> **"Time To Rise."** — The official web presence of Team Apex Gaming, India's rising BGMI esports organization founded by Jonathan Gaming.
+> **"Time To Rise."** - The official web presence of Team Apex Gaming, India's rising BGMI esports organization founded by Jonathan Gaming.
 
 ## Overview
 
@@ -31,11 +31,11 @@ This is the official website for **Team Apex Gaming (TAG)**, built as a modern, 
 
 | Route           | Description                                           |
 | --------------- | ----------------------------------------------------- |
-| `/`             | Home — hero, stats, org members, roster preview, news |
+| `/`             | Home - hero, stats, org members, roster preview, news |
 | `/about`        | Organization story and timeline                       |
 | `/team`         | Full org members (founders, creators, staff)          |
 | `/roster/bgmi`  | Active BGMI competitive roster                        |
-| `/news`         | Newsroom — all articles                               |
+| `/news`         | Newsroom - all articles                               |
 | `/news/:slug`   | Individual news article                               |
 | `/achievements` | Org and individual achievements                       |
 | `/contact`      | Contact form                                          |
@@ -96,7 +96,7 @@ src/
 │   └── ui/           # shadcn/ui base components
 ├── hooks/            # Custom React hooks
 ├── lib/
-│   ├── data.ts       # Static content — roster, news, achievements, timeline
+│   ├── data.ts       # Static content - roster, news, achievements, timeline
 │   ├── animations.ts # Framer Motion animation variants
 │   └── utils.ts      # Utility helpers
 ├── pages/            # Route-level page components

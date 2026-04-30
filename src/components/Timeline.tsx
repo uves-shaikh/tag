@@ -1,3 +1,5 @@
+"use client";
+
 import { Lock } from "lucide-react";
 import { TIMELINE_EVENTS } from "@/lib/data";
 import { motion } from "framer-motion";
@@ -18,14 +20,20 @@ export default function Timeline() {
               transition={{ duration: 0.5, delay: i * 0.04 }}
               className={`relative pl-10 md:pl-0 md:grid md:grid-cols-2 md:gap-8 ${right ? "md:[&>*:first-child]:order-2" : ""}`}
             >
-              <div className={`md:px-8 ${right ? "md:text-left" : "md:text-right"}`}>
-                <span className={`inline-flex items-center rounded px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] ${e.locked ? "bg-surface-2 text-muted-strong" : "bg-primary-muted text-primary"}`}>
+              <div
+                className={`md:px-8 ${right ? "md:text-left" : "md:text-right"}`}
+              >
+                <span
+                  className={`inline-flex items-center rounded px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] ${e.locked ? "bg-surface-2 text-muted-strong" : "bg-primary-muted text-primary"}`}
+                >
                   {e.locked && <Lock className="h-3 w-3 mr-1.5" />}
                   {e.year}
                 </span>
               </div>
               <div className="md:px-8">
-                <p className={`text-sm leading-relaxed ${e.locked ? "text-muted-strong italic" : "text-cream-muted"}`}>
+                <p
+                  className={`text-sm leading-relaxed ${e.locked ? "text-muted-strong italic" : "text-cream-muted"}`}
+                >
                   {e.event}
                 </p>
               </div>
